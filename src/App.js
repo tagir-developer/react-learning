@@ -14,11 +14,20 @@ class App extends React.Component {
     visible: false
   }
 
-  changeTitleHandler = newTitle => {
-    this.setState({
-      title: newTitle
-    })
+  onChangeName(value, index) {
+    const car = this.state.cars[index]
+    car.name = value
+    const cars = [...this.state.cars]
+    cars[index] = car
+    this.setState({ cars })
   }
+
+  deleteHandler = index => {
+    const cars = this.state.cars.concat()
+    cars.splice(index, 1)
+    this.setState({ cars })
+  }
+
 
   toggleHandler = () => {
     this.setState({
@@ -40,7 +49,8 @@ class App extends React.Component {
             key={index}
             name={car.name}
             year={car.year}
-            changeTitle={() => this.changeTitleHandler(car.name)} />
+            deleteHandler={this.deleteHandler.bind(this, index)}
+            onChangeName={event => this.onChangeName(event.target.value, index)} />
 
         )
 
@@ -53,9 +63,13 @@ class App extends React.Component {
 
         <button onClick={this.toggleHandler}>Toggle cars</button> <br />
 
-
-        { cars }
-
+        <div style={{
+          width: 400,
+          paddingTop: 20,
+          margin: 'auto'
+        }}>
+          {cars}
+        </div>
 
       </div>
     );
