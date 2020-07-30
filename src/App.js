@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 import Car from './Car/Car'
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import Counter from './Counter/Counter'
 
 class App extends React.Component {
 
@@ -54,28 +56,14 @@ class App extends React.Component {
 
     console.log('App render')
 
-    let cars = null
-
-    if (this.state.visible) {
-      cars = this.state.cars.map((car, index) => {
-
-        return (
-          <Car
-            key={index}
-            name={car.name}
-            year={car.year}
-            deleteHandler={this.deleteHandler.bind(this, index)}
-            onChangeName={event => this.onChangeName(event.target.value, index)} />
-
-        )
-
-      })
-    }
 
     return (
       <div className="App">
-        {/* <h1>{this.state.title}</h1> */}
+
         <h1>{this.props.title}</h1>
+
+        <Counter />
+        <br/>
 
         <button onClick={this.toggleHandler}>Toggle cars</button> <br />
 
@@ -84,7 +72,23 @@ class App extends React.Component {
           paddingTop: 20,
           margin: 'auto'
         }}>
-          {cars}
+          {
+            (this.state.visible)
+              ? this.state.cars.map((car, index) => {
+
+                return (
+                  <ErrorBoundary key={index}>
+                    <Car
+                      name={car.name}
+                      year={car.year}
+                      deleteHandler={this.deleteHandler.bind(this, index)}
+                      onChangeName={event => this.onChangeName(event.target.value, index)} />
+                  </ErrorBoundary>
+
+                )
+
+              }) : null
+          }
         </div>
 
       </div>

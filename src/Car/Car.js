@@ -1,28 +1,47 @@
 import React from 'react'
-import Radium from 'radium'
 import './Car.scss'
 
 class Car extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
-		console.log('App componentWillReceiveProps')
+		console.log('App componentWillReceiveProps', nextProps)
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log('App shouldComponentUpdate')
+		console.log('App shouldComponentUpdate', nextProps, nextState)
 		return true
+		// return true this.props.name.trim() !== nextProps.name.trim()
 	}
 
 	componentWillUpdate(nextProps, nextState) {
-		console.log('App componentWillUpdate')
+		console.log('App componentWillUpdate', nextProps, nextState)
 	}
+
+	// static getDerivedStateFromProps(nextProps, prevState) {
+	// 	console.log('App getDerivedStateFromProps', nextProps, prevState)
+
+	// 	return prevState
+	// }
+
+	// getSnapshotBeforeUpdate() {
+	// 	console.log('App getSnaphotBeforeUpdate')
+	// }
 
 	componentDidUpdate() {
 		console.log('App componentDidUpdate')
 	}
 
+	componentWillUnmount() {
+		console.log('App componentWillUnmount')
+	}
+
 	render() {
 		console.log('Car render')
+		// if ( Math.random() > 0.7 ) {
+		// 	throw new Error('Car random failed')
+		// }
+
+
 		const styles = {
 			border: '1px solid grey',
 			boxShadow: 'rgb(65 65 65 / 55%) 1px 2px 6px',
@@ -62,4 +81,4 @@ class Car extends React.Component {
 }
 
 
-export default Radium(Car)
+export default Car
