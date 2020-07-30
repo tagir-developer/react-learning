@@ -1,8 +1,15 @@
+$bgcolor: #eff6ee;
+
 .Car {
 	padding-bottom: 15px;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	transition: border, box-shadow .3s;
+	background-color: $bgcolor;
+}
+
+.header {
+	color: #004f4f;
 }
 
 .input {}

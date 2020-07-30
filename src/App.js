@@ -1,18 +1,31 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Car from './Car/Car'
 
 class App extends React.Component {
 
-  state = {
-    cars: [
-      { name: 'Mazda', year: 2019 },
-      { name: 'BMW 3', year: 2010 },
-      { name: 'Lada 2', year: 2015 }
-    ],
-    title: 'React components',
-    visible: false
+  constructor(props) {
+    console.log('App constructor')
+    super(props)
+    this.state = {
+      cars: [
+        { name: 'Mazda', year: 2019 },
+        // { name: 'BMW 3', year: 2010 },
+        // { name: 'Lada 2', year: 2015 }
+      ],
+      title: 'React components',
+      visible: false
+    }
   }
+
+  // componentWillMount() {
+  //   console.log('App componentWillMount')
+  // }
+
+  componentDidMount() {
+    console.log('App componentDidMount')
+  }
+
 
   onChangeName(value, index) {
     const car = this.state.cars[index]
@@ -39,6 +52,8 @@ class App extends React.Component {
 
   render() {
 
+    console.log('App render')
+
     let cars = null
 
     if (this.state.visible) {
@@ -59,7 +74,8 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>{this.state.title}</h1>
+        {/* <h1>{this.state.title}</h1> */}
+        <h1>{this.props.title}</h1>
 
         <button onClick={this.toggleHandler}>Toggle cars</button> <br />
 
